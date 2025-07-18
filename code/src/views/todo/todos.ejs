@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include("../partials/head") %>
+    <title>My Todos</title>
+</head>
+<body>
+    <h1>Todo List</h1>
+    <form id="todoForm">
+        <label for="Title">Title</label>
+        <input type="text" style="margin-bottom: 12px;" id="title">
+        <label for="description">Description</label>
+        <input type="text" style="margin-bottom: 12px;" id="description">
+        <input type="submit" id="submit-btn" value="Add Todo" style="margin-bottom: 12px;">
+        <p id="message"></p>
+    </form>
+    <ul>
+        <% data.forEach(todo => { %>
+            <li><%= todo.title %> - <%= todo.description %></li>
+        <% }) %>
+    </ul>
+
+    <script>
+      document
+        .getElementById("todoForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const title = document.getElementById("title").value;
+          const description = document.getElementById("description").value;
+
+          try {
+            const response = await fetch("/api/todos/add", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ title, description }),
+            });
+
+            const result = await response.json();
+
+           if (response.ok) {
+                message.style.color = "green";
+                message.textContent = "Successfully uploaded";
+
+                setTimeout(() => {
+                    window.location.href = window.location.href;
+                }, 3000);
+            } else {
+                message.style.color = "red";
+                message.textContent = "Failed to upload todo";
+            }
+          } catch (e) {
+            console.error(error);
+            message.style.color = "red";
+            message.textContent = "Something went wrong. Please try again.";
+          }
+        });
+    </script>
+</body>
+</html>

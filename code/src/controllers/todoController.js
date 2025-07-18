@@ -15,7 +15,7 @@ exports.getTodoById = async (req, res) => {
 exports.getAllTodo = async (req, res) => {
   try {
     const todos = await todoService.getAllTodosByUser(req.session.userId);
-    return res.status(200).json({ success: true, data: todos });
+    return res.render("todo/todos", { data: todos });
   } catch (err) {
     return res.status(500).json({ success: false, message: "Internal server error" });
   }
