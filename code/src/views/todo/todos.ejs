@@ -14,11 +14,22 @@
         <label for="description">Description</label>
         <input type="text" style="margin-bottom: 12px;" id="description">
         <input type="submit" id="submit-btn" value="Add Todo" style="margin-bottom: 12px;">
+   
+        <input type="button" id="update-btn" value="Update Todo" style="margin-bottom: 12px;">
+        <input type="button" id="delete-btn" value="Delete Todo" style="margin-bottom: 12px;">
+
+        <input type="hidden" id="todo-id" value="">
         <p id="message"></p>
     </form>
     <ul>
         <% data.forEach(todo => { %>
-            <li><%= todo.title %> - <%= todo.description %></li>
+            <li data-id="<%= todo.id %>"
+                data-title="<%= todo.title %>"
+                data-description="<%= todo.description %>"
+                onclick="selectTodo(this)"
+                style="cursor:pointer; user-select:none;">
+                <%= todo.title %> - <%= todo.description %>
+              </li>
         <% }) %>
     </ul>
 
@@ -30,7 +41,7 @@
 
           const title = document.getElementById("title").value;
           const description = document.getElementById("description").value;
-
+          const message = document.getElementById("message");
           try {
             const response = await fetch("/api/todos/add", {
               method: "POST",
@@ -57,6 +68,90 @@
             message.textContent = "Something went wrong. Please try again.";
           }
         });
+
+
+
+        document
+        .getElementById("update-btn")
+        .addEventListener('click', async (event) => {
+          event.preventDefault();
+
+          const title = document.getElementById("title").value;
+          const description = document.getElementById("description").value;
+          const todoId = document.getElementById("todo-id").value; 
+
+         
+            if (!todoId) {
+                alert("Please select a todo!");
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/todos/update/${todoId}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ title, description }),
+                });
+
+                if (!response.ok) {
+                    throw new Error("Update failed due to network");
+                }
+
+                const result = await response.json();
+                console.log('Updated Successfully', result);
+                message.style.color = "green";
+                message.textContent = "Successfully updated";
+
+                setTimeout(() => {
+                    window.location.href = window.location.href;
+                }, 1000);
+            } catch (e) {
+                console.error("Update Failed", e);
+                message.style.color = "red";
+                message.textContent = "Update failed";
+            }
+        });
+
+
+        document
+        .getElementById("delete-btn")
+        .addEventListener("click", async (event) => {
+            event.preventDefault();
+            const todoId = document.getElementById("todo-id").value;
+
+            if (!todoId) {
+                return alert("Please select a todo to delete.");
+            }
+
+            try {
+                const response = await fetch(`/api/todos/delete/${todoId}`, {
+                    method: "DELETE",
+                });
+
+                if (!response.ok) {
+                    throw new Error("Delete failed due to networj");
+                }
+
+                message.style.color = "green";
+                message.textContent = "Successfully deleted";
+                setTimeout(() => window.location.reload(), 1000);
+            } catch (e) {
+                console.error("Delete failed", e);
+                message.style.color = "red";
+                message.textContent = "Delete unsuccessful";
+            }
+        });
+
+  
+
+        function selectTodo(li) {
+            document.querySelectorAll("li").forEach(item => item.style.backgroundColor = "");
+
+              li.style.backgroundColor = "#d3d3d3";
+              document.getElementById("todo-id").value = li.dataset.id;
+              document.getElementById("title").value = li.dataset.title;
+              document.getElementById("description").value = li.dataset.description;
+}
     </script>
 </body>
 </html>

@@ -42,6 +42,7 @@ exports.updateTodo = async (req, res) => {
     if (!updated)
       return res.status(404).json({ success: false, message: "Todo not found" });
 
+    
     return res.status(200).json({ success: true, message: "Todo updated successfully" });
   } catch (err) {
     return res.status(500).json({ success: false, message: "Internal server error" });
