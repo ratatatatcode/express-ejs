@@ -8,7 +8,6 @@ exports.login = async (req, res) => {
     req.session.userId = userCredential.user.uid;
 
     return res.status(200).json({
-      success: true,
       message: "Login successfully",
     });
   } catch (e) {
@@ -18,12 +17,11 @@ exports.login = async (req, res) => {
       e.code === "auth/invalid-credential"
     ) {
       return res.status(401).json({
-        success: false,
         message: "Invalid email or password",
       });
     }
 
-    return res.status(500).json({ success: false, message: "Internal server error" });
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -35,13 +33,11 @@ exports.signup = async (req, res) => {
     user = await authService.createUser({ name, email, password });
 
     return res.status(201).json({
-      success: true,
       message: "Account created successfully",
     });
   } catch (e) {
     if (e.code === "auth/email-already-in-use") {
       return res.status(409).json({
-        success: false,
         message: "The email address is already in use",
       });
     }
@@ -54,7 +50,7 @@ exports.signup = async (req, res) => {
       }
     }
 
-    return res.status(500).json({ success: false, message: "Internal server error" });
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -64,7 +60,6 @@ exports.resetPasswordForEmail = async (req, res) => {
 
     if (!email) {
       return res.status(400).json({
-        success: false,
         message: "Email is required",
       });
     }
@@ -72,19 +67,16 @@ exports.resetPasswordForEmail = async (req, res) => {
     await authService.resetPassword(email);
 
     return res.status(200).json({
-      success: true,
       message: "Password reset email sent",
     });
   } catch (error) {
     if (error.message === "not-found" || error.code === "auth/user-not-found") {
       return res.status(404).json({
-        success: false,
         message: "No user found with that email address",
       });
     }
 
     return res.status(500).json({
-      success: false,
       message: "Failed to send password reset email",
     });
   }
@@ -95,13 +87,11 @@ exports.logout = (req, res) => {
     if (err) {
       console.error(err);
       return res.status(500).json({
-        success: false,
         message: "Logout failed",
       });
     }
 
     return res.status(200).json({
-      success: true,
       message: "Logout successful",
     });
   });
