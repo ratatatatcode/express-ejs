@@ -1,40 +1,15 @@
-const { auth, db } = require("@/config/firebaseConfig");
-const {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  deleteUser,
-  updatePassword,
-  reauthenticateWithCredential,
-  EmailAuthProvider,
-  sendPasswordResetEmail,
-} = require("firebase/auth");
-const {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  setDoc,
-  updateDoc,
-  where,
-} = require("firebase/firestore");
+const authService = require("@/services/authService");
 
 exports.login = async (req, res) => {
   try {
-    if (!auth) console.log("Firebase Auth is not initialized.");
-
     const { email, password } = req.body;
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    const userId = userCredential.user.uid;
-    req.session.userId = userId;
+    const userCredential = await authService.loginUser(email, password);
+
+    req.session.userId = userCredential.user.uid;
 
     return res.status(200).json({
       success: true,
-      message: "Login succesfully"
+      message: "Login successfully",
     });
   } catch (e) {
     if (
@@ -47,8 +22,8 @@ exports.login = async (req, res) => {
         message: "Invalid email or password",
       });
     }
-    
-    console.log(e);
+
+    return res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
 
@@ -56,21 +31,8 @@ exports.signup = async (req, res) => {
   let user = null;
 
   try {
-    if (!auth) console.log("Firebase Auth is not initialized");
-
     const { name, email, password } = req.body;
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    );
-    const userId = userCredential.user.uid;
-    const userData = {
-      userId,
-      name,
-    };
-
-    await setDoc(doc(db, "users", userId), { ...userData });
+    user = await authService.createUser({ name, email, password });
 
     return res.status(201).json({
       success: true,
@@ -86,14 +48,13 @@ exports.signup = async (req, res) => {
 
     if (user) {
       try {
-        await deleteUser(user);
-        console.log("Account deleted due to error:", e);
+        await authService.deleteAuthUser(user);
       } catch (authError) {
-        console.log("Failed to delete account from Firebase Auth:", authError);
+        console.error("Failed to rollback user creation:", authError);
       }
     }
 
-    console.log(e);
+    return res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
 
@@ -108,39 +69,20 @@ exports.resetPasswordForEmail = async (req, res) => {
       });
     }
 
-    let emailFound = false;
-    const usersQuery = query(
-      collection(db, "users"),
-      where("email", "==", email),
-    );
-    const usersSnapshot = await getDocs(usersQuery);
-
-    if (!usersSnapshot.empty) {
-      emailFound = true;
-    }
-
-    if (!emailFound) {
-      return res.status(404).json({
-        success: false,
-        message: "Email not found",
-      });
-    }
-
-    await sendPasswordResetEmail(auth, email);
+    await authService.resetPassword(email);
 
     return res.status(200).json({
       success: true,
       message: "Password reset email sent",
     });
   } catch (error) {
-    console.error("Error sending password reset email:", error);
-
-    if (error.code === "auth/user-not-found") {
+    if (error.message === "not-found" || error.code === "auth/user-not-found") {
       return res.status(404).json({
         success: false,
         message: "No user found with that email address",
       });
     }
+
     return res.status(500).json({
       success: false,
       message: "Failed to send password reset email",
@@ -158,6 +100,9 @@ exports.logout = (req, res) => {
       });
     }
 
-    res.redirect("/");
+    return res.status(200).json({
+      success: true,
+      message: "Logout successful",
+    });
   });
 };
