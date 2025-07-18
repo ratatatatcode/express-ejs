@@ -1,0 +1,23 @@
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# dotenv env files
+.env
+.env.*  # supports .env.development, .env.local, etc.
+
+# Firebase service account key
+firebase-adminsdk.json
+firebaseKey.json
+serviceAccountKey.json
+*.firebase.json
+
+# Firebase emulators/local config
+.firebase/
+.firebaserc
+
+# IDE/editor config
