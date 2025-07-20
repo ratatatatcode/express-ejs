@@ -47,7 +47,20 @@ npm init -y
 npm i dotenv ejs express express-session firebase module-alias
 ```
 ```
-npm i --save-dev nodemon
+npm i --save-dev nodemon prettier
+```
+Then update your package.json scripts section.
+```js
+{
+  "name": "code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "format": "prettier --write .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
 ```
 
 ### Folder and JavaScript Files
@@ -60,6 +73,8 @@ npm i --save-dev nodemon
 ```
 "type": "commonjs",
 "_moduleAliases": {
+  "@": "src"
+},
 ```
 
 ### .env
