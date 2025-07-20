@@ -33,14 +33,14 @@
         const res = await fetch("/api/auth/signup", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, password }),
+          body: JSON.stringify({ name, email, password })
         });
 
         const result = await res.json();
-        message.style.color = res.ok ? "green" : "red";
-        message.textContent = result.message;
-      } catch (e) {
-        console.error(e);
+        res.ok ? (message.style.color = "green", message.textContent = result.message) :
+                 (message.style.color = "red", message.textContent = result.message);
+      } catch (err) {
+        console.error(err);
         message.style.color = "red";
         message.textContent = "Something went wrong. Please try again.";
       }
