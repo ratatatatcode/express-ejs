@@ -13,13 +13,6 @@ const {
 
 const todosRef = collection(db, "todos");
 
-exports.getTodoById = async (id) => {
-  const todoRef = doc(db, "todos", id);
-  const todoSnap = await getDoc(todoRef);
-  if (!todoSnap.exists()) return null;
-  return { id: todoSnap.id, ...todoSnap.data() };
-};
-
 exports.getAllTodosByUser = async (userId) => {
   const q = query(todosRef, where("userId", "==", userId));
   const snapshot = await getDocs(q);

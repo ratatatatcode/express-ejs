@@ -15,6 +15,7 @@
     "@": "src"
   },
   "dependencies": {
+    "@firebase/firestore": "^4.9.0",
     "dotenv": "^17.2.0",
     "ejs": "^3.1.10",
     "express": "^5.1.0",

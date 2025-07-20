@@ -1,17 +1,5 @@
 const todoService = require("@/services/todoService");
 
-exports.getTodoById = async (req, res) => {
-  try {
-    const todo = await todoService.getTodoById(req.params.id);
-    if (!todo)
-      return res.status(404).json({ success: false, message: "Todo not found" });
-
-    return res.status(200).json({ success: true, data: todo });
-  } catch (err) {
-    return res.status(500).json({ success: false, message: "Internal server error" });
-  }
-};
-
 exports.getAllTodo = async (req, res) => {
   try {
     const todos = await todoService.getAllTodosByUser(req.session.userId);
