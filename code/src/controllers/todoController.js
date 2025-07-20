@@ -28,7 +28,6 @@ exports.updateTodo = async (req, res) => {
   try {
     const updated = await todoService.updateTodo(req.params.id, req.body);
     if (!updated) return res.status(404).json({ message: "Todo not found" });
-
     return res.status(200).json({ message: "Todo updated successfully" });
   } catch (err) {
     return res.status(500).json({ message: "Internal server error" });
