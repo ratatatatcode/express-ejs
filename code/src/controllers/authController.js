@@ -1,9 +1,9 @@
 const authService = require("@/services/authService");
 
-exports.login = async (req, res) => {
+exports.signin = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const userCredential = await authService.loginUser(email, password);
+    const userCredential = await authService.signinUser(email, password);
     req.session.userId = userCredential.user.uid;
     return res.status(200).json({ message: "Login successfully" });
   } catch (e) {

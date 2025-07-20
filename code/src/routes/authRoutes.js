@@ -12,7 +12,7 @@ router.get("/signup", redirectIfAuthenticated, (req, res) =>
 router.get("/forgot-password", redirectIfAuthenticated, (req, res) =>
   res.render("auth/forgotPassword"),
 );
-router.post("/api/auth/signin", authController.login);
+router.post("/api/auth/signin", authController.signin);
 router.post("/api/auth/signup", authController.signup);
 router.post("/api/auth/recovery", authController.resetPasswordForEmail);
 router.post("/api/auth/logout", authController.logout);

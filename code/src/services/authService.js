@@ -14,7 +14,7 @@ const {
   where,
 } = require("firebase/firestore");
 
-exports.loginUser = async (email, password) => {
+exports.signinUser = async (email, password) => {
   return await signInWithEmailAndPassword(auth, email, password);
 };
 
