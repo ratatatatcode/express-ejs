@@ -69,7 +69,7 @@ npm i --save-dev nodemon
 node_modules/
 ```
 
-> Friendly reminder: Never push your .env file under any circumstances.**
+> Friendly reminder: Never push your .env file under any circumstances.
 
 14. Insert the following inside your .env:
 ```
