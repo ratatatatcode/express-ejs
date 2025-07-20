@@ -130,12 +130,11 @@ Hello World
 ```
 <br>
 
-> If it works, it feels truly fulfilling, especially if it's your first time.
-> That “Hello, world!” is the first step — you, becoming a web developer.
+> **If it works, it feels truly fulfilling, especially if it's your first time. That “Hello, world!” is the first step — you, becoming a web developer.**
 <br>
 
 ## Now let me explain some of the lines from src/server.js.
-Loads support for custom module paths (with @ aliases). This lets you use @/ instead of long relative paths like ../../services/....<br>
+Loads support for custom module paths (with @ aliases). This lets you use @/ instead of long relative paths like ../../services/...<br>
 ```js
 require("module-alias/register");
 ```
