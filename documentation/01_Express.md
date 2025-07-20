@@ -19,9 +19,9 @@ Yes or maybe no—it depends on how you define a full-stack developer.
 
 Whether you call yourself a full-stack developer is up to you.
 
-**Using Express.js with EJS allows you to build full-stack applications**, but specifically in the classic monolithic full-stack style where both backend and frontend are handled in one app.
+> **Using Express.js with EJS allows you to build full-stack applications**, but specifically in the classic monolithic full-stack style where both backend and frontend are handled in one app.
 
-Before you start building your own todo web application or any other web app, **try running the code folder first**. Take some time to browse through it, understand how it works, and don't hesitate to ask LLMs for help if you need clarification.
+> Before you start building your own todo web application or any other web app, **try running the code folder first**. Take some time to browse through it, understand how it works, and don't hesitate to ask LLMs for help if you need clarification.
 
 ## Setup
 1. Download Visual Studio Code or any code editor that supports web development.
