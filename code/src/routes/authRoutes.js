@@ -2,7 +2,13 @@ const express = require("express");
 const router = express.Router();
 const authController = require("@/controllers/authController");
 
-router.get("/", (req, res) => res.render("auth/signin"));
+router.get("/", (req, res) => {
+  if (req.session.userId) {
+    return res.redirect("/todos");
+  }
+  res.render("auth/signin");
+});
+
 router.get("/signup", (req, res) => res.render("auth/signup"));
 router.get("/forgot-password", (req, res) => res.render("auth/forgotPassword"));
 router.post("/api/auth/signin", authController.login);
