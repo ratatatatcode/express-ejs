@@ -24,12 +24,19 @@ Whether you call yourself a full-stack developer is up to you.
 > Before you start building your own todo web application or any other web app, **try running the code folder first**. Take some time to browse through it, understand how it works, and don't hesitate to ask LLMs for help if you need clarification.
 
 ## Setup
+**Code Editor**<br>
 1. Download Visual Studio Code or any code editor that supports web development.
 2. Install extensions that may help you in the development process.
 3. Learn some useful VS Code shortcuts to speed up your coding.
+
+**GitHub (version control)**<br>
 4. Create a GitHub repository and name it whatever you like.
 5. Clone it using your code editor. I suggest syncing your GitHub account with your editor so you can easily clone, push, pull, and more.
+
+**NodeJS**<br>
 6. Set up your Node.js environment. Download Node.js and configure the environment variable if needed.
+
+**Packages/Dependencies**<br>
 7. Go ahead and open your terminal. This is where things get started.
 8. Run this in your terminal:
 ```bash
@@ -42,6 +49,8 @@ npm i dotenv ejs express express-session firebase module-alias
 ```
 npm i --save-dev nodemon
 ```
+
+**Folder and JavaScript Files**<br>
 10. Create a folder and name it src. Inside it, add a file named server.js (or app/index.js — it’s up to you).
 11. Update the package.json (outside the src folder) to set the entry point:
 ```
@@ -52,6 +61,8 @@ npm i --save-dev nodemon
 "type": "commonjs",
 "_moduleAliases": {
 ```
+
+**.env**<br>
 13. Create a .env file (outside the src folder) and a .gitignore file. In .gitignore, add the following lines:
 ```
 .env
@@ -71,6 +82,8 @@ FIREBASE_STORAGE_BUCKET=
 FIREBASE_MESSAGING_SENDER_ID=
 FIREBASE_APP_ID=
 ```
+
+**server.js and Testing**<br>
 15. Now, add the following code to your src/server.js to test if everything is working correctly.
 ```js
 require("module-alias/register");
