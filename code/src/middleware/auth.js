@@ -14,5 +14,5 @@ function isAuthenticated(req, res, next) {
 
 module.exports = {
   redirectIfAuthenticated,
-  isAuthenticated
+  isAuthenticated,
 };
