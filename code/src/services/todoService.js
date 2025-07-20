@@ -8,7 +8,7 @@ const {
   deleteDoc,
   addDoc,
   query,
-  where
+  where,
 } = require("firebase/firestore");
 
 const todosRef = collection(db, "todos");
@@ -19,7 +19,12 @@ exports.getAllTodosByUser = async (userId) => {
   return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 };
 
-exports.createTodo = async ({ title, description, status = "pending", userId }) => {
+exports.createTodo = async ({
+  title,
+  description,
+  status = "pending",
+  userId,
+}) => {
   const newTodo = {
     title,
     description,
@@ -47,7 +52,7 @@ exports.deleteTodoById = async (id) => {
 exports.deleteAllTodos = async () => {
   const snapshot = await getDocs(todosRef);
   const deletes = snapshot.docs.map((docSnap) =>
-    deleteDoc(doc(db, "todos", docSnap.id))
+    deleteDoc(doc(db, "todos", docSnap.id)),
   );
   await Promise.all(deletes);
 };

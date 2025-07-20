@@ -10,12 +10,14 @@ const todoRoutes = require("@/routes/todoRoutes");
 const app = express();
 
 app.set("trust proxy", 1);
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false }
-}));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false },
+  }),
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

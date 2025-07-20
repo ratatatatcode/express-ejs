@@ -19,7 +19,11 @@ exports.loginUser = async (email, password) => {
 };
 
 exports.createUser = async ({ name, email, password }) => {
-  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  const userCredential = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password,
+  );
   const userId = userCredential.user.uid;
 
   const userData = {
@@ -35,7 +39,10 @@ exports.createUser = async ({ name, email, password }) => {
 };
 
 exports.resetPassword = async (email) => {
-  const usersQuery = query(collection(db, "users"), where("email", "==", email));
+  const usersQuery = query(
+    collection(db, "users"),
+    where("email", "==", email),
+  );
   const usersSnapshot = await getDocs(usersQuery);
 
   if (usersSnapshot.empty) {
