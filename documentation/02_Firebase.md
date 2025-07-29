@@ -8,7 +8,7 @@ Firebase is a backend platform by Google that provides services like authenticat
 **Firebase with the Client SDK in Express.js** is like running browser logic on the server. It works, but you're restricted to what regular users can do. For true backend control, always prefer the Admin SDK.
 
 **So why am I going to use this Client SDK?**<br>
-Honestly, it's just really easy to set up.
+Honestly, it's just really easy to set up.<br><br>
 
 ## Setup Firebase Client SDK
 1. Open [firebase console](https://console.firebase.google.com/u/0/).
