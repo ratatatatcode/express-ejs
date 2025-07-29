@@ -80,6 +80,29 @@ app.use(session({
   cookie: { secure: false }
 }));
 ```
+If login is successful, the user ID is saved to the session (req.session.userId). This allows you to access it in future requests, e.g., to verify if the user is authenticated.
+```js
+// controllers/authController.js
+exports.signin = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const userCredential = await authService.signinUser(email, password);
+    
+    // Save user ID in session
+    req.session.userId = userCredential.user.uid;
+    ...
+  }
+}
+```
+```js
+// middleware/auth.js
+function redirectIfAuthenticated(req, res, next) {
+  if (req.session.userId) {
+    return res.redirect("/todos");
+  }
+  next();
+}
+```
 <br>
 
 Parses incoming JSON and form data (from POST requests). So the app can read submitted data from users.<br>
