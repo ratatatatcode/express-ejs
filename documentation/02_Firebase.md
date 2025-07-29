@@ -3,7 +3,7 @@ Can we make fire with it?<br>
 > Of course not, haha
 <br>
 
-Firebase for web developers is a platform that provides backend services like user authentication, database, file storage, and hosting without the need to manage your own server. It helps you build full-stack web apps using just frontend technologies like HTML, CSS, and JavaScript.
+Firebase is a backend platform by Google that provides services like authentication, cloud databases (Firestore), file storage, and hosting.
 
 **Firebase with the Client SDK in Express.js** is like running browser logic on the server. It works, but you're restricted to what regular users can do. For true backend control, always prefer the Admin SDK.
 
