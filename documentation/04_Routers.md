@@ -43,21 +43,21 @@ First, we import or require the express module in order to use its features like
 
 ### Now to access the API, you can use various API testing tools like Postman and Insomnia.
 
-```POST /api/auth/signin```
-
 1.Handles login form submissions via authController.signin.
 
-```POST /api/auth/signup```
+```POST /api/auth/signin```
 
 2.Handles user registration via authController.signup.
 
-```POST /api/auth/recovery```
+```POST /api/auth/signup```
 
 3.Triggers password recovery logic via authController.resetPasswordForEmail.
 
-```POST /api/auth/logout```
+```POST /api/auth/recovery```
 
 4.Logs the user out via authController.logout.
 
-🛠️ You can test these API routes using tools like Postman, Insomnia, or frontend JavaScript (e.g., using fetch or axios).
-## Lastly export the router module
+```POST /api/auth/logout```
+
+## Lastly, export the router 
+```module.exports = router;```
