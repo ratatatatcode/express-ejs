@@ -59,5 +59,5 @@ First, we import or require the express module in order to use its features like
 
 ```POST /api/auth/logout```
 
-## Lastly, export the router 
+# Lastly, export the router 
 ```module.exports = router;```
