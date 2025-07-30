@@ -40,14 +40,12 @@ require("module-alias/register");
 ```js
 const todoService = require("@/services/todoService");
 ```
-<br>
 
 ### Module Alias
 Loads environment variables from a .env file into process.env. Useful for storing things like secret keys or port numbers outside the code.<br>
 ```js
 require("dotenv").config();
 ```
-<br>
 
 ### Imports
 Imports Express (a web framework), session middleware, and Node’s built-in path module. These help set up the server, manage sessions, and handle file paths. By importing these, you are using existing libraries or modules, not creating your own.<br>
@@ -58,21 +56,18 @@ const express = require("express");
 const session = require("express-session");
 const path = require("path");
 ```
-<br>
 
 ### Express
 Creates an instance of an Express app. This app will handle requests and responses.<br>
 ```js
 const app = express();
 ```
-<br>
 
 ### Proxy
 Tells Express to trust the first proxy (useful if your app is behind something like Nginx or Heroku).<br>
 ```js
 app.set("trust proxy", 1);
 ```
-<br>
 
 ### Session
 Sets up session handling using a secret key.<br>
@@ -110,7 +105,6 @@ function redirectIfAuthenticated(req, res, next) {
   next();
 }
 ```
-<br>
 
 ### Accepting Data from Frontend
 Parses incoming JSON and URL-encoded form data from POST requests, allowing the app to read and handle data submitted by users.<br>
@@ -132,19 +126,18 @@ const res = await fetch("/api/auth/signin", {
 /* Backend Requirement
    app.use(express.urlencoded({ extended: true }));
  */
-<form action="/api/auth/login" method="POST">
+<form action="/api/auth/signin" method="POST">
   <input type="email" name="email" placeholder="Enter your email" />
   <input type="password" name="password" placeholder="Enter your password" />
   <button type="submit">Login</button>
 </form>
 ```
-<br>
 
+### Static Files
 Serves files (like images, CSS, JS) from the public folder at /static URL. Example: public/logo.png → accessible at /static/logo.png.<br>
 ```js
 app.use("/static", express.static(path.join(__dirname, "public")));
 ```
-<br>
 
 Sets up the folder for your HTML-like templates. Uses EJS as the view engine to render dynamic HTML. So you can write pages with variables, loops, etc.<br>
 ```js
@@ -160,7 +153,6 @@ app.set("view engine", "ejs");
   <% }) %>
 </ul>
 ```
-<br>
 
 ### Basic Route Setup
 Responds with "Hello World" when someone visits the homepage (/).<br>
@@ -169,7 +161,6 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 ```
-<br>
 
 ### Starting the Server
 Starts the server on the given port (from .env or default 3000). Logs a message once the server is running so you know it's ready.<br>
