@@ -33,6 +33,7 @@ app.listen(PORT, () => {
 ```
 
 ## Now let me explain some of the lines from src/server.js.
+### Module Alias
 Loads support for custom module paths (with @ aliases). This lets you use @/ instead of long relative paths like ../../services/...<br>
 ```js
 require("module-alias/register");
@@ -41,7 +42,7 @@ require("module-alias/register");
 const todoService = require("@/services/todoService");
 ```
 
-### Module Alias
+### .env
 Loads environment variables from a .env file into process.env. Useful for storing things like secret keys or port numbers outside the code.<br>
 ```js
 require("dotenv").config();
