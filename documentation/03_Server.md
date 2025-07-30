@@ -42,13 +42,17 @@ const todoService = require("@/services/todoService");
 ```
 <br>
 
+### Module Alias
 Loads environment variables from a .env file into process.env. Useful for storing things like secret keys or port numbers outside the code.<br>
 ```js
 require("dotenv").config();
 ```
 <br>
 
-Imports Express (web framework), session middleware, and Node’s built-in path module. These help set up the server, manage sessions, and handle file paths.<br>
+### Imports
+Imports Express (a web framework), session middleware, and Node’s built-in path module. These help set up the server, manage sessions, and handle file paths. By importing these, you are using existing libraries or modules, not creating your own.<br>
+
+This is CommonJS syntax (require). If you're using "type": "module" in your package.json, you'll be using ES Modules syntax (import instead).
 ```js
 const express = require("express");
 const session = require("express-session");
@@ -56,18 +60,21 @@ const path = require("path");
 ```
 <br>
 
+### Express
 Creates an instance of an Express app. This app will handle requests and responses.<br>
 ```js
 const app = express();
 ```
 <br>
 
+### Proxy
 Tells Express to trust the first proxy (useful if your app is behind something like Nginx or Heroku).<br>
 ```js
 app.set("trust proxy", 1);
 ```
 <br>
 
+### Session
 Sets up session handling using a secret key.<br>
 resave: false: avoids saving sessions that weren’t changed.<br>
 saveUninitialized: true: saves new sessions even if they haven't changed.<br>
@@ -105,10 +112,31 @@ function redirectIfAuthenticated(req, res, next) {
 ```
 <br>
 
-Parses incoming JSON and form data (from POST requests). So the app can read submitted data from users.<br>
+### Accepting Data from Frontend
+Parses incoming JSON and URL-encoded form data from POST requests, allowing the app to read and handle data submitted by users.<br>
 ```js
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+```
+```js
+/* Backend Requirement
+   app.use(express.json());
+ */
+const res = await fetch("/api/auth/signin", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ email, password })
+});
+```
+```js
+/* Backend Requirement
+   app.use(express.urlencoded({ extended: true }));
+ */
+<form action="/api/auth/login" method="POST">
+  <input type="email" name="email" placeholder="Enter your email" />
+  <input type="password" name="password" placeholder="Enter your password" />
+  <button type="submit">Login</button>
+</form>
 ```
 <br>
 
@@ -134,6 +162,7 @@ app.set("view engine", "ejs");
 ```
 <br>
 
+### Basic Route Setup
 Responds with "Hello World" when someone visits the homepage (/).<br>
 ```js
 app.get("/", (req, res) => {
@@ -142,6 +171,7 @@ app.get("/", (req, res) => {
 ```
 <br>
 
+### Starting the Server
 Starts the server on the given port (from .env or default 3000). Logs a message once the server is running so you know it's ready.<br>
 ```js
 const PORT = process.env.PORT || 3000;
