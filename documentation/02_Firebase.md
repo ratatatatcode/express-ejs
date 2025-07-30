@@ -16,6 +16,6 @@ Honestly, it's just really easy to set up. I'm also confused about the differenc
 5. Click "Continue to console"
 6. In the sidebar, under **Build, click **"Authentication"** then "Get started." Below "Native providers," click "Email/Password," enable it, and then click "Save."
 7. Also under **Build**, click **"Firestore Database"** then "Create Database." Select a location; I usually pick "asia-southeast1 (Singapore)" then click "Next." Choose "Start in test mode" and finally, click "Create."
-
+<br>
 
 > **You are now a certified member of the Fire Nation!**
