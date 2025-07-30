@@ -71,16 +71,12 @@ app.set("trust proxy", 1);
 ```
 
 ### Session
-Sets up session handling using a secret key.<br>
-resave: false: avoids saving sessions that weren’t changed.<br>
-saveUninitialized: true: saves new sessions even if they haven't changed.<br>
-secure: false: allows cookies to be sent over HTTP (not HTTPS) – useful for development.<br>
 ```js
 app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false }
+  secret: process.env.SESSION_SECRET, // sets up session handling using a secret key
+  resave: false, // false: avoids saving sessions that weren’t changed
+  saveUninitialized: true, // true: saves new sessions even if they haven't changed.
+  cookie: { secure: false }, // false: allows cookies to be sent over HTTP (not HTTPS) – useful for development
 }));
 ```
 If login is successful, the user ID is saved to the session (req.session.userId). This allows you to access it in future requests, e.g., to verify if the user is authenticated.
