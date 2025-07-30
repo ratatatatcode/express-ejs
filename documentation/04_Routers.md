@@ -26,7 +26,9 @@ router.post("/api/auth/logout", authController.logout);
 module.exports = router;
 
 ```
-# Now let me explain some of the lines of src/routes/authRoutes.js
+## Now let me explain some of the lines of src/routes/authRoutes.js
 
-First, we import or require the express module in order to use its features like handling routes. So, in order to have create different routes we first need to initialize the router. Basically, it works like the initialization of app
+First, we import or require the express module in order to use its features like handling routes. So, in order to have create different routes we first need to initialize the router. Basically, it works like the initialization of express app but for the initialization of the routing system. We also imported the authController in order to use the logic or the functions for handling auth related actions (Tip: You can use @ for setting up aliases in the package.json file). The function ```{ redirectIfauthenticated }``` is also imported to authenticate the user to access the /todos page.
+
+###
 
