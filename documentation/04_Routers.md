@@ -88,7 +88,7 @@ router.delete(
 
 module.exports = router;
 ```
-The ```isAuthenticated``` is a middleware applied in all of the request to redirect the user to the signin page if they are not logged-in.
+### The ```isAuthenticated``` is a middleware applied in all of the request to redirect the user to the signin page if they are not logged-in.
 
 In the GET request, the ```todoController.getAllTodo``` is used to get and render all the todo data for the user.
 
