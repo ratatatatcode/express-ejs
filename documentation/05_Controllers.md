@@ -91,6 +91,7 @@ exports.logout = (req, res) => {
 The  logic for all to-do-related operations like CRUD is managed by this controller. It collaborates with the ```todoService.js```, which has the essential logic for communicating with the backend or database.
 
 ## Code Breakdown
+### Fetches all to-do items for the currently logged-in user.
 ```js
 exports.getAllTodo = async (req, res) => {
   try {
@@ -101,6 +102,7 @@ exports.getAllTodo = async (req, res) => {
   }
 };
 ```
+### Creates a new to-do item based on the request body.
 ```js
 exports.addTodo = async (req, res) => {
   try {
@@ -117,6 +119,7 @@ exports.addTodo = async (req, res) => {
   }
 };
 ```
+### Updates an existing to-do item by its ID using new data from the request body.
 ```js
 exports.updateTodo = async (req, res) => {
   try {
@@ -128,7 +131,7 @@ exports.updateTodo = async (req, res) => {
   }
 };
 ```
-Deletes a single to-do item by its ID.
+### Deletes a single to-do item by its ID.
 ```js
 exports.deleteTodoById = async (req, res) => {
   try {
@@ -139,7 +142,7 @@ exports.deleteTodoById = async (req, res) => {
   }
 };
 ```
-
+### Deletes all to-do items.
 ```js
 exports.deleteAllTodo = async (req, res) => {
   try {
