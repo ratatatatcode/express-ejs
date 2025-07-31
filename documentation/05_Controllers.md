@@ -86,3 +86,8 @@ exports.logout = (req, res) => {
 
 ```
 
+## Now let's move on to ```todoController.js```
+
+The  logic for all to-do-related operations like CRUD is managed by this controller. It collaborates with the todoService, which has the essential logic for communicating with the backend or database.
+
+
