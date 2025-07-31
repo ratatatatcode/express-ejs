@@ -62,7 +62,7 @@ First, we import or require the express module to use its features like handling
 
 ### Lastly, export the router for authRoutes.js 
 
-    ```module.exports = router;```
+     module.exports = router;
 
 # Let's go on to todoRoutes.js now.
 
