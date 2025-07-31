@@ -88,14 +88,15 @@ router.delete(
 
 module.exports = router;
 ```
-
-
+The ```isAuthenticated``` is used in all of the request to redirect the user to the signin page if they are not logged-in.
 ```
 router.get("/todos", isAuthenticated, todoController.getAllTodo);
 ```
+In this GET request, the ```todoController.getAllTodo``` is used to get and render all the todo data.
 ```
 router.post("/api/todos/add", isAuthenticated, todoController.addTodo);
 ```
+In this POST request, the ```todoController.addTodo``` is used to 
 ```
 router.put("/api/todos/update/:id", isAuthenticated, todoController.updateTodo);
 ```
