@@ -44,25 +44,24 @@ First, we import or require the express module to use its features like handling
 
 ### Now to access the API, you can use various API testing tools like Postman and Insomnia.
 
-1.Handles login form submissions via authController.signin.
+1. Handles login form submissions via authController.signin.
 
 ```POST /api/auth/signin```
 
-2.Handles user registration via authController.signup.
+2. Handles user registration via authController.signup.
 
 ```POST /api/auth/signup```
 
-3.Triggers password recovery logic via authController.resetPasswordForEmail.
+3. Triggers password recovery logic via authController.resetPasswordForEmail.
 
 ```POST /api/auth/recovery```
 
-4.Logs the user out via authController.logout.
+4. Logs the user out via authController.logout.
 
 ```POST /api/auth/logout```
 
-### Lastly, export the router 
+### Lastly, export the router for authRoutes.js 
 ```module.exports = router;```
-
 
 # Let's go on to todoRoutes.js now.
 
@@ -112,3 +111,6 @@ router.delete(
   todoController.deleteAllTodo,
 );
 ```
+
+### Lastly, export the router for todoRoutes.js
+```module.exports = router;```
