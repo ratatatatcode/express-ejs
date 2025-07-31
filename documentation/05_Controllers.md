@@ -88,6 +88,65 @@ exports.logout = (req, res) => {
 
 ## Now let's move on to ```todoController.js```
 
-The  logic for all to-do-related operations like CRUD is managed by this controller. It collaborates with the todoService, which has the essential logic for communicating with the backend or database.
+The  logic for all to-do-related operations like CRUD is managed by this controller. It collaborates with the ```todoService.js```, which has the essential logic for communicating with the backend or database.
 
+## Code Breakdown
+```js
+exports.getAllTodo = async (req, res) => {
+  try {
+    const todos = await todoService.getAllTodosByUser(req.session.userId);
+    return res.render("todo/todos", { data: todos });
+  } catch (err) {
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+```
+```js
+exports.addTodo = async (req, res) => {
+  try {
+    const { title, description, status } = req.body;
+    const todo = await todoService.createTodo({
+      title,
+      description,
+      status,
+      userId: req.session.userId,
+    });
+    return res.status(201).json({ data: todo });
+  } catch (err) {
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+```
+```js
+exports.updateTodo = async (req, res) => {
+  try {
+    const updated = await todoService.updateTodo(req.params.id, req.body);
+    if (!updated) return res.status(404).json({ message: "Todo not found" });
+    return res.status(200).json({ message: "Todo updated successfully" });
+  } catch (err) {
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+```
+```js
+exports.deleteTodoById = async (req, res) => {
+  try {
+    await todoService.deleteTodoById(req.params.id);
+    return res.status(200).json({ message: "Todo deleted successfully" });
+  } catch (err) {
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+```
+
+```js
+exports.deleteAllTodo = async (req, res) => {
+  try {
+    await todoService.deleteAllTodos();
+    return res.status(200).json({ message: "All todos deleted successfully" });
+  } catch (err) {
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+```
 
