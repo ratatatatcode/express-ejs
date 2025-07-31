@@ -88,18 +88,15 @@ router.delete(
 
 module.exports = router;
 ```
-The ```isAuthenticated``` is used in all of the request to redirect the user to the signin page if they are not logged-in.
-```
-router.get("/todos", isAuthenticated, todoController.getAllTodo);
-```
-In this GET request, the ```todoController.getAllTodo``` is used to get and render all the todo data.
-```
-router.post("/api/todos/add", isAuthenticated, todoController.addTodo);
-```
-In this POST request, the ```todoController.addTodo``` is used to 
-```
-router.put("/api/todos/update/:id", isAuthenticated, todoController.updateTodo);
-```
+The ```isAuthenticated``` is a middleware applied in all of the request to redirect the user to the signin page if they are not logged-in.
+
+In the GET request, the ```todoController.getAllTodo``` is used to get and render all the todo data for the user.
+
+In the POST request, the ```todoController.addTodo``` is used to create an object literal shorthand to add a new todo data for the user.
+
+In the PUT request, the ```todoController.updateTodo``` is used to request the changes of the user in the body and update it.
+
+In this DELETE request, the ```todoController.deleteTodoById``` deletes a single todo of the user by using the ID.
 ```
 router.delete(
   "/api/todos/delete/:id",
@@ -107,6 +104,7 @@ router.delete(
   todoController.deleteTodoById,
 );
 ```
+In this Delete request, the ```todoController.deleteAllTodo``` deletes all the the todos of the user.
 ```
 router.delete(
   "/api/todos/delete",
