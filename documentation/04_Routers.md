@@ -46,22 +46,23 @@ First, we import or require the express module to use its features like handling
 
 1. Handles login form submissions via authController.signin.
 
-```POST /api/auth/signin```
+   ```POST /api/auth/signin```
 
 2. Handles user registration via authController.signup.
 
-```POST /api/auth/signup```
+   ```POST /api/auth/signup```
 
 3. Triggers password recovery logic via authController.resetPasswordForEmail.
 
-```POST /api/auth/recovery```
+   ```POST /api/auth/recovery```
 
 4. Logs the user out via authController.logout.
 
-```POST /api/auth/logout```
+   ```POST /api/auth/logout```
 
 ### Lastly, export the router for authRoutes.js 
-```module.exports = router;```
+
+    ```module.exports = router;```
 
 # Let's go on to todoRoutes.js now.
 
