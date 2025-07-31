@@ -128,6 +128,7 @@ exports.updateTodo = async (req, res) => {
   }
 };
 ```
+Deletes a single to-do item by its ID.
 ```js
 exports.deleteTodoById = async (req, res) => {
   try {
