@@ -1,12 +1,14 @@
 # Controllers
-In this project, two separate controller files are used for better maintainability.
+In this project, two separate controller files are used for better maintainability and modularity.
 
 ## Let's start with ```authcontroller.js```.
 
-This controller is used to manage the logic and function of all the auth-related actions.
-```js
-const authService = require("@/services/authService");
+It serves as the bridge between the routes and the authService, managing actions such as sign-in, sign-up, password recovery, and logout.
 
+## Code Breakdown 
+
+### Handles user sign-in by verifying email and password.
+```js
 exports.signin = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -24,7 +26,9 @@ exports.signin = async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
-
+```
+### Creates a new user account. If user creation fails, it performs a rollback to ensure consistency. 
+```js
 exports.signup = async (req, res) => {
   let user = null;
 
@@ -49,7 +53,9 @@ exports.signup = async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
-
+```
+### Sends a password reset email to the given address.
+```js
 exports.resetPasswordForEmail = async (req, res) => {
   try {
     const { email } = req.body;
@@ -68,7 +74,9 @@ exports.resetPasswordForEmail = async (req, res) => {
       .json({ message: "Failed to send password reset email" });
   }
 };
-
+```
+### Ends the current user session.
+```js
 exports.logout = (req, res) => {
   req.session.destroy((err) => {
     if (err) return res.status(500).json({ message: "Logout failed" });
