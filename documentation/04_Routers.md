@@ -90,28 +90,28 @@ module.exports = router;
 ```
 ### The ```isAuthenticated``` is a middleware applied in all of the request to redirect the user to the signin page if they are not logged-in.
 
-In the GET request, the ```todoController.getAllTodo``` is used to get and render all the todo data for the user.
+1. In the GET request, the ```todoController.getAllTodo``` is used to get and render all the todo data for the user.
 
-In the POST request, the ```todoController.addTodo``` is used to create an object literal shorthand to add a new todo data for the user.
+2. In the POST request, the ```todoController.addTodo``` is used to create an object literal shorthand to add a new todo data for the user.
 
-In the PUT request, the ```todoController.updateTodo``` is used to request the changes of the user in the body and update it.
+3. In the PUT request, the ```todoController.updateTodo``` is used to request the changes of the user in the body and update it.
 
-In this DELETE request, the ```todoController.deleteTodoById``` deletes a single todo of the user by using the ID.
-```
-router.delete(
-  "/api/todos/delete/:id",
-  isAuthenticated,
-  todoController.deleteTodoById,
-);
-```
-In this Delete request, the ```todoController.deleteAllTodo``` deletes all the the todos of the user.
-```
-router.delete(
-  "/api/todos/delete",
-  isAuthenticated,
-  todoController.deleteAllTodo,
-);
-```
+4. In this DELETE request, the ```todoController.deleteTodoById``` deletes a single todo of the user by using the ID.
+    ```
+    router.delete(
+      "/api/todos/delete/:id",
+      isAuthenticated,
+      todoController.deleteTodoById,
+    );
+    ```
+5. In this Delete request, the ```todoController.deleteAllTodo``` deletes all the the todos of the user.
+    ```
+    router.delete(
+      "/api/todos/delete",
+      isAuthenticated,
+      todoController.deleteAllTodo,
+    );
+    ```
 
 ### Lastly, export the router for todoRoutes.js
 ```module.exports = router;```
