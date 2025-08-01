@@ -45,7 +45,8 @@ exports.deleteTodoById = async (req, res) => {
 
 exports.deleteAllTodo = async (req, res) => {
   try {
-    await todoService.deleteAllTodos();
+    const userId = req.session.userId;
+    await todoService.deleteAllTodos(userId);
     return res.status(200).json({ message: "All todos deleted successfully" });
   } catch (err) {
     return res.status(500).json({ message: "Internal server error" });

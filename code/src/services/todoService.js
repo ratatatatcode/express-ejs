@@ -49,10 +49,12 @@ exports.deleteTodoById = async (id) => {
   await deleteDoc(todoRef);
 };
 
-exports.deleteAllTodos = async () => {
-  const snapshot = await getDocs(todosRef);
+exports.deleteAllTodos = async (userId) => {
+  const q = query(todosRef, where("userId", "==", userId));
+  const snapshot = await getDocs(q);
   const deletes = snapshot.docs.map((docSnap) =>
-    deleteDoc(doc(db, "todos", docSnap.id)),
+    deleteDoc(doc(db, "todos", docSnap.id))
   );
   await Promise.all(deletes);
 };
+
