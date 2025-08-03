@@ -2,13 +2,10 @@
 ##  Firebase Authentication Methods
 ### This line imports four specific functions from Firebase Authentication:
 
-```createUserWithEmailAndPassword``` is used to register a new user using an email and password.
-
-```signInWithEmailAndPassword``` is used to log in an existing user.
-
-```deleteUser``` deletes the currently authenticated user from Firebase Auth.
-
-```sendPasswordResetEmail``` sends a password reset link to the user's email.
+- ```createUserWithEmailAndPassword``` is used to register a new user using an email and password.
+- ```signInWithEmailAndPassword``` is used to log in an existing user.
+- ```deleteUser``` deletes the currently authenticated user from Firebase Auth.
+- ```sendPasswordResetEmail``` sends a password reset link to the user's email.
 
 ```js
 const {
@@ -21,17 +18,12 @@ const {
 ```
 ### This line imports several Firestore functions:
 
-```collection``` is used to access a Firestore collection like "users" or "todos".
-
-```doc``` is used to reference a specific document inside a collection, like a user document with a certain ID.
-
-```setDoc``` writes or replaces data in a document — useful for saving new user info after registration.
-
-```getDocs``` runs a Firestore query and returns all matching documents.
-
-```query``` is used to build queries with conditions.
-
-```where``` adds filtering to a query, for example, finding users where the email equals a certain value.
+- ```collection``` is used to access a Firestore collection like "users" or "todos".
+- ```doc``` is used to reference a specific document inside a collection, like a user document with a certain ID.
+- ```setDoc``` writes or replaces data in a document — useful for saving new user info after registration.
+- ```getDocs``` runs a Firestore query and returns all matching documents.
+- ```query``` is used to build queries with conditions.
+- ```where``` adds filtering to a query, for example, finding users where the email equals a certain value.
 
 ```js
 const {
@@ -53,7 +45,6 @@ This service acts as the abstraction layer for Firebase Authentication and Fires
 
 It is used by the authController.js to perform authentication-related tasks cleanly and modularly.
 
-
 ## Code Breakdown
 
 ### Signs in a user using their email and password.
@@ -64,11 +55,9 @@ exports.signinUser = async (email, password) => {
 };
 ```
 
-Purpose: Authenticates a user.
-
-Returns: Firebase UserCredential object if successful.
-
-Throws: Firebase authentication errors (auth/wrong-password, auth/user-not-found, etc.).
+Purpose: Authenticates a user.<br>
+Returns: Firebase UserCredential object if successful.<br>
+Throws: Firebase authentication errors (auth/wrong-password, auth/user-not-found, etc.).<br>
 
 ### Creates a new user account in Firebase Auth and saves user data to Firestore.
 
@@ -85,13 +74,11 @@ exports.createUser = async ({ name, email, password }) => {
 };
 
 ```
-Purpose: Registers a new user and persists profile info (name, email, userId) in Firestore.
 
-Returns: Firebase User object if successful.
-
-Firestore Path: users/{userId} stores user data.
-
-Throws: Firebase auth/email-already-in-use and other registration errors.
+Purpose: Registers a new user and persists profile info (name, email, userId) in Firestore.<br>
+Returns: Firebase User object if successful.<br>
+Firestore Path: users/{userId} stores user data.<br>
+Throws: Firebase auth/email-already-in-use and other registration errors.<br>
 
 ### Sends a password reset email to a user’s email address.
 
@@ -108,14 +95,10 @@ exports.resetPassword = async (email) => {
 };
 ```
 
-Purpose: Sends a password reset email if the email exists in Firestore.
-
-Validation: Ensures email exists in the users collection before attempting reset.
-
-Throws:
-
-"not-found" if the email is not found in Firestore.
-
+Purpose: Sends a password reset email if the email exists in Firestore.<br>
+Validation: Ensures email exists in the users collection before attempting reset.<br>
+Throws:<br>
+"not-found" if the email is not found in Firestore.<br>
 Firebase password reset errors.
 
 ### Deletes a user from Firebase Authentication.
@@ -126,9 +109,9 @@ exports.deleteAuthUser = async (user) => {
 };
 
 ```
-Purpose: Deletes a given Firebase user.
 
-Used For: Rollback during failed user creation or account removal.
+Purpose: Deletes a given Firebase user.<br>
+Used For: Rollback during failed user creation or account removal.<br>
 
 ## Now let's move on to todoService.js
 
@@ -147,11 +130,10 @@ exports.getAllTodosByUser = async (userId) => {
   return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 };
 ```
-Purpose: Retrieves all to-do items belonging to a given userId.
 
-Returns: Array of to-do objects with id and other fields from Firestore.
-
-Usage: Called on user dashboard or list display.
+Purpose: Retrieves all to-do items belonging to a given userId.<br>
+Returns: Array of to-do objects with id and other fields from Firestore.<br>
+Usage: Called on user dashboard or list display.<br>
 
 ###  Creates a new to-do item.
 
@@ -170,11 +152,9 @@ exports.createTodo = async ({ title, description, status = "pending", userId }) 
 
 ```
 
-Purpose: Adds a new to-do to the Firestore todos collection.
-
-Defaults: status defaults to "pending", and createdAt is the current ISO timestamp.
-
-Returns: Newly created to-do object with Firestore-generated id.
+Purpose: Adds a new to-do to the Firestore todos collection.<br>
+Defaults: status defaults to "pending", and createdAt is the current ISO timestamp.<br>
+Returns: Newly created to-do object with Firestore-generated id.<br>
 
 ### Updates an existing to-do by ID.
 ```js
@@ -186,15 +166,12 @@ exports.updateTodo = async (id, updates) => {
   return true;
 };
 ```
-Purpose: Updates the fields of an existing to-do using its document id.
 
-Validation: First checks if the to-do exists before updating.
-
-Returns:
-
-true if updated successfully.
-
-null if the to-do item doesn't exist.
+Purpose: Updates the fields of an existing to-do using its document id.<br>
+Validation: First checks if the to-do exists before updating.<br>
+Returns:<br>
+true if updated successfully.<br>
+null if the to-do item doesn't exist.<br>
 
 ### Deletes a single to-do by its ID.
 
@@ -204,11 +181,10 @@ exports.deleteTodoById = async (id) => {
   await deleteDoc(todoRef);
 };
 ```
-Purpose: Removes a specific to-do item from Firestore.
 
-Parameter: id of the document in the todos collection.
-
-Returns: void
+Purpose: Removes a specific to-do item from Firestore.<br>
+Parameter: id of the document in the todos collection.<br>
+Returns: void<br>
 
 ###  Deletes all to-do items belonging to a user.
 ```js
@@ -222,8 +198,7 @@ exports.deleteAllTodos = async (userId) => {
 };
 
 ```
-Purpose: Removes all to-dos associated with a specific userId.
 
-Usage: Useful for account deletion or reset.
-
+Purpose: Removes all to-dos associated with a specific userId.<br>
+Usage: Useful for account deletion or reset.<br>
 Returns: void after completing all deletions in parallel.
