@@ -1,4 +1,4 @@
-# Services
+# Services in ExpressJS and EJS
 ##  Firebase Authentication Methods
 ### This line imports four specific functions from Firebase Authentication:
 
