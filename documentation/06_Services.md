@@ -227,5 +227,3 @@ Purpose: Removes all to-dos associated with a specific userId.
 Usage: Useful for account deletion or reset.
 
 Returns: void after completing all deletions in parallel.
-
-
