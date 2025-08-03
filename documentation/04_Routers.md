@@ -62,7 +62,9 @@ First, we import or require the express module to use its features like handling
 
 ### Lastly, export the router for authRoutes.js 
 
-     module.exports = router;
+```js
+module.exports = router;
+```
 
 # Let's go on to todoRoutes.js now.
 
@@ -97,7 +99,7 @@ module.exports = router;
 3. In the PUT request, the ```todoController.updateTodo``` is used to request the changes of the user in the body and update it.
 
 4. In this DELETE request, the ```todoController.deleteTodoById``` deletes a single todo of the user by using the ID.
-    ```
+    ```js
     router.delete(
       "/api/todos/delete/:id",
       isAuthenticated,
@@ -105,7 +107,7 @@ module.exports = router;
     );
     ```
 5. In this Delete request, the ```todoController.deleteAllTodo``` deletes all the the todos of the user.
-    ```
+    ```js
     router.delete(
       "/api/todos/delete",
       isAuthenticated,
@@ -114,4 +116,6 @@ module.exports = router;
     ```
 
 ### Lastly, export the router for todoRoutes.js
-```module.exports = router;```
+```js
+module.exports = router;
+```
