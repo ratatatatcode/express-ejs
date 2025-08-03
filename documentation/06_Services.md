@@ -1,14 +1,5 @@
 # Services
 ##  Firebase Authentication Methods
-```js
-const {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  deleteUser,
-  sendPasswordResetEmail,
-} = require("firebase/auth");
-
-```
 ### This line imports four specific functions from Firebase Authentication:
 
 ```createUserWithEmailAndPassword``` is used to register a new user using an email and password.
@@ -19,16 +10,14 @@ const {
 
 ```sendPasswordResetEmail``` sends a password reset link to the user's email.
 
-
 ```js
 const {
-  collection,
-  doc,
-  getDocs,
-  query,
-  setDoc,
-  where,
-} = require("firebase/firestore");
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  deleteUser,
+  sendPasswordResetEmail,
+} = require("firebase/auth");
+
 ```
 ### This line imports several Firestore functions:
 
@@ -43,6 +32,18 @@ const {
 ```query``` is used to build queries with conditions.
 
 ```where``` adds filtering to a query, for example, finding users where the email equals a certain value.
+
+```js
+const {
+  collection,
+  doc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} = require("firebase/firestore");
+```
+
 
 These functions allow your backend to store and retrieve structured data associated with users or any other app entity.
 
