@@ -8,7 +8,7 @@ Firebase is a backend platform by Google that provides services like authenticat
 **Why am I going to use this Client SDK?**<br>
 Honestly, it's just really easy to set up. I'm also confused about the difference between the Admin and Client SDK. I'll leave it up to you to decide which one to use for our project. Anyway, I'm transitioning to SQL now, haha.<br><br> 
 
-## Setup Firebase Client SDK
+## Setup Firebase Client SDK for ExpressJS and EJS
 1. Open [firebase console](https://console.firebase.google.com/u/0/).
 2. I assume you already have an account. Now, click "Create a Firebase Project." It's up to you whether you want to enable Google Analytics or not.
 3. You will be redirected to the Project Overview page. Under "Get started by adding Firebase to your app," click the **"</>"** (Web) button.
@@ -19,3 +19,4 @@ Honestly, it's just really easy to set up. I'm also confused about the differenc
 <br>
 
 > **You are now a certified member of the Fire Nation!**
+
