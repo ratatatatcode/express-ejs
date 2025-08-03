@@ -1,4 +1,4 @@
-# Server.js
+# Server.js in ExpressJS and EJS
 ```js
 require("module-alias/register");
 require("dotenv").config();
@@ -167,3 +167,4 @@ app.listen(PORT, () => {
   console.log(`Listening on PORT ${PORT}...`);
 });
 ```
+
