@@ -1,4 +1,4 @@
-# Controllers
+# Controllers in ExpressJS and EJS
 In this project, two separate controller files are used for better maintainability and modularity.
 
 ## Let's start with ```authcontroller.js```.
