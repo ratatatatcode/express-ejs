@@ -1,7 +1,18 @@
 # EJS (pages) in ExpressJS and EJS
 EJS, which stands for Embedded JavaScript, is a popular templating engine used with Express.js to generate dynamic HTML content. It allows developers to embed JavaScript code directly within HTML markup, enabling the integration of data and logic into the presentation layer of a web application. 
-
 ```js
+// src/controllers/todoController.js
+exports.getAllTodo = async (req, res) => {
+  try {
+    const todos = await todoService.getAllTodosByUser(req.session.userId);
+    return res.render("todo/todos", { data: todos });
+  } catch (err) {
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+```
+```html
+<!-- views/todo/todos.ejs -->
 <tbody id="todoTableBody">
   <% data.forEach(todo => { %>
     <tr data-id="<%= todo.id %>">
