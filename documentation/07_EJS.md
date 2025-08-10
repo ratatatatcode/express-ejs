@@ -45,5 +45,5 @@ When I say EJS does not update automatically, I mean that once the server sends 
 <link rel="shortcut icon" href="static/logo/favicon.ico" type="image/x-icon">
 ```
 ```html
-<%- include("../partials/head") %>p
+<%- include("../partials/head") %>
 ```
