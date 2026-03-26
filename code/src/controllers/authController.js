@@ -14,6 +14,7 @@ exports.signin = async (req, res) => {
     )
       return res.status(401).json({ message: "Invalid email or password" });
 
+    console.error(`Sign in error: ${e}`)
     return res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -39,6 +40,7 @@ exports.signup = async (req, res) => {
       }
     }
 
+    console.error(`Sign up error: ${e}`)
     return res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -56,6 +58,7 @@ exports.resetPasswordForEmail = async (req, res) => {
         .status(404)
         .json({ message: "No user found with that email address" });
 
+    console.error(`Password reset error: ${e}`)
     return res
       .status(500)
       .json({ message: "Failed to send password reset email" });
@@ -65,6 +68,8 @@ exports.resetPasswordForEmail = async (req, res) => {
 exports.logout = (req, res) => {
   req.session.destroy((err) => {
     if (err) return res.status(500).json({ message: "Logout failed" });
+
+    console.error(`Logout error: ${e}`)
     return res.status(200).json({ message: "Logout successful" });
   });
 };

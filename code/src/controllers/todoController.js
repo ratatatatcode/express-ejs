@@ -5,6 +5,7 @@ exports.getAllTodo = async (req, res) => {
     const todos = await todoService.getAllTodosByUser(req.session.userId);
     return res.render("todo/todos", { data: todos });
   } catch (err) {
+    console.error(`Get all todo error: ${e}`)
     return res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -20,6 +21,7 @@ exports.addTodo = async (req, res) => {
     });
     return res.status(201).json({ data: todo });
   } catch (err) {
+    console.error(`Add todo error: ${e}`)
     return res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -30,6 +32,7 @@ exports.updateTodo = async (req, res) => {
     if (!updated) return res.status(404).json({ message: "Todo not found" });
     return res.status(200).json({ message: "Todo updated successfully" });
   } catch (err) {
+    console.error(`Update error: ${e}`)
     return res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -39,6 +42,7 @@ exports.deleteTodoById = async (req, res) => {
     await todoService.deleteTodoById(req.params.id);
     return res.status(200).json({ message: "Todo deleted successfully" });
   } catch (err) {
+    console.error(`Delete todo error: ${e}`)
     return res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -49,6 +53,7 @@ exports.deleteAllTodo = async (req, res) => {
     await todoService.deleteAllTodos(userId);
     return res.status(200).json({ message: "All todos deleted successfully" });
   } catch (err) {
+    console.error(`Delete all todo error: ${e}`)
     return res.status(500).json({ message: "Internal server error" });
   }
 };
