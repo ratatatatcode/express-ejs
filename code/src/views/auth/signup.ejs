@@ -8,15 +8,23 @@
 </head>
 <body>
   <main class="authContainer">
-    <form id="signupForm">
-      <label for="name">Name</label>
-      <input type="text" id="name" style="margin-bottom: 12px;" />
-      <label for="email">Email</label>
-      <input type="email" id="email" style="margin-bottom: 12px;" />
-      <label for="password">Password</label>
-      <input type="password" id="password" style="margin-bottom: 12px;" />
-      <input type="submit" id="submit-btn" value="Sign Up" style="margin-bottom: 12px;" />
+    <form id="signinForm" class="flex flex-col gap-2 border py-8 px-12 shadow-md rounded-lg bg-white">
+      <h1 class="font-bold mb-4">ExpressEJS Sample Website</h1>
+      <div class="flex flex-col">
+        <label for="name" class="text-xs font-semibold">Name</label>
+        <input type="text" id="name" class="border rounded-md" />
+      </div>
+      <div class="flex flex-col">
+        <label for="email" class="text-xs font-semibold">Email</label>
+        <input type="email" id="email" class="border rounded-md" />
+      </div>
+      <div class="flex flex-col">
+        <label for="password" class="text-xs font-semibold">Password</label>
+        <input type="password" id="password" class="border rounded-md" />
+      </div>
+      <input type="submit" id="submit-btn" value="Sign Up" class="text-xs text-white font-semibold border bg-[#3c3c3c] rounded-md py-1"/>
       <p id="message"></p>
+      <a href="/" class="text-xs text-center"><u>I already have an account</u></a>
     </form>
   </main>
 
