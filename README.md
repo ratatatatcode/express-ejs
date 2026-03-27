@@ -13,3 +13,5 @@ Learn how to create, read, update, and delete data in a full-stack environment â
 <br><br>
 
 > After building your first application, not just a todo app, consider working on a more advanced project like an e-commerce or social media application. I guarantee that transitioning to ReactJS or NextJS will feel natural and wonâ€™t overwhelm you.
+
+![Output](./code/src/public/output/express-ejs.gif)
