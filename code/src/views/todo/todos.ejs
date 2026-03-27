@@ -7,56 +7,70 @@
   <title>My Todos</title>
 </head>
 <body>
-  <h1>Todo List</h1>
+  <main class="flex flex-col items-center justify-start min-h-screen w-full my-12">
+    <h1 class="font-bold">Todo List</h1>
+    <form id="todoForm" onsubmit="return handleSubmitForm(event)" class="flex flex-col gap-2 w-[300px]">
+      <div class="flex flex-col">
+        <label for="title" class="text-xs font-semibold">Title</label>
+        <input type="text" id="title" required class="text-xs p-2 border rounded-md"  />
+      </div>
+      <div class="flex flex-col">
+        <label for="description" class="text-xs font-semibold">Description</label>
+        <textarea type="text" id="description" required class="text-xs p-2 border rounded-md resize-none"></textarea>
+      </div>
+      <div class="flex flex-col">
+        <label for="status" class="text-xs font-semibold">Status</label>
+        <select id="status" class="text-xs p-2 border rounded-md">
+          <option value="Pending">Pending</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Done">Done</option>
+        </select>
+      </div>
+      
+      <div class="flex justify-evenly gap-2">
+        <input type="submit" value="Add Todo" class="text-xs text-white font-semibold border bg-[#3c3c3c] rounded-md py-1 px-4" />
+      </div>
+      <input type="hidden" id="todo-id" />
 
-  <form id="todoForm" onsubmit="return handleSubmitForm(event)">
-    <label for="title">Title</label>
-    <input type="text" id="title" required style="margin-bottom: 12px;" />
-    <label for="description">Description</label>
-    <input type="text" id="description" required style="margin-bottom: 12px;" />
-    <label for="status">Status</label>
-    <select id="status" style="margin-bottom: 12px;">
-      <option value="Pending">Pending</option>
-      <option value="In Progress">In Progress</option>
-      <option value="Done">Done</option>
-    </select>
-    <input type="submit" value="Add Todo" style="margin-bottom: 12px;" />
-    <input type="hidden" id="todo-id" />
-    <p id="message"></p>
-  </form>
+      <p id="message" class="text-xs text-center font-semibold mb-2"></p>
+    </form>
 
-  <button onclick="deleteAllTodos()">Delete All</button>
-  <button onclick="handleLogout()" style="float: right; margin: 12px;">Logout</button>
+    
+    <div class="flex gap-2">
+      <button onclick="deleteAllTodos()" class="text-xs text-white font-semibold border bg-[red] rounded-md py-1 px-4">Delete All</button>
+      <button onclick="handleLogout()" class="text-xs text-white font-semibold border bg-[#3c3c3c] rounded-md py-1 px-4">Logout</button>
+    </div>
 
-  <table id="todoTable" border="1" cellpadding="10" cellspacing="0" style="width: 100%; text-align: left;">
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody id="todoTableBody">
-      <% data.forEach(todo => { %>
-        <tr data-id="<%= todo.id %>">
-          <td onclick="makeEditable(this, 'title')"><span><%= todo.title %></span></td>
-          <td onclick="makeEditable(this, 'description')"><span><%= todo.description %></span></td>
-          <td>
-            <select onchange="markAsDirty(this)">
-              <option value="Pending" <%= todo.status === "Pending" ? "selected" : "" %>>Pending</option>
-              <option value="In Progress" <%= todo.status === "In Progress" ? "selected" : "" %>>In Progress</option>
-              <option value="Done" <%= todo.status === "Done" ? "selected" : "" %>>Done</option>
-            </select>
-          </td>
-          <td>
-            <button onclick="updateRow(this)">Update</button>
-            <button onclick="deleteTodo('<%= todo.id %>')">Delete</button>
-          </td>
+    <table id="todoTable" border="1" cellpadding="10" cellspacing="0">
+      <thead>
+        <tr class="text-sm font-semibold">
+          <th>Title</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Actions</th>
         </tr>
-      <% }) %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody id="todoTableBody">
+        <% data.forEach(todo => { %>
+          <tr data-id="<%= todo.id %>">
+            <td onclick="makeEditable(this, 'title')" class="text-xs"><span><%= todo.title %></span></td>
+            <td onclick="makeEditable(this, 'description')" class="text-xs"><span><%= todo.description %></span></td>
+            <td>
+              <select onchange="markAsDirty(this)" class="text-xs p-2 border rounded-md">
+                <option value="Pending" <%= todo.status === "Pending" ? "selected" : "" %>>Pending</option>
+                <option value="In Progress" <%= todo.status === "In Progress" ? "selected" : "" %>>In Progress</option>
+                <option value="Done" <%= todo.status === "Done" ? "selected" : "" %>>Done</option>
+              </select>
+            </td>
+            <td>
+              <button onclick="updateRow(this)" class="text-xs text-white font-semibold border bg-[#3c3c3c] rounded-md py-1 px-4">Update</button>
+              <button onclick="deleteTodo('<%= todo.id %>')" class="text-xs text-white font-semibold border bg-[#3c3c3c] rounded-md py-1 px-4">Delete</button>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </main>
 
   <script>
   const message = document.getElementById("message");
@@ -96,18 +110,18 @@
     const row = document.createElement("tr");
     row.setAttribute("data-id", todo.id);
     row.innerHTML = `
-      <td onclick="makeEditable(this, 'title')"><span>${todo.title}</span></td>
-      <td onclick="makeEditable(this, 'description')"><span>${todo.description}</span></td>
+      <td onclick="makeEditable(this, 'title')" class="text-xs"><span>${todo.title}</span></td>
+      <td onclick="makeEditable(this, 'description')" class="text-xs"><span>${todo.description}</span></td>
       <td>
-        <select onchange="markAsDirty(this)">
+        <select onchange="markAsDirty(this)" class="text-xs p-2 border rounded-md>
           <option value="Pending" ${todo.status === "Pending" ? "selected" : ""}>Pending</option>
           <option value="In Progress" ${todo.status === "In Progress" ? "selected" : ""}>In Progress</option>
           <option value="Done" ${todo.status === "Done" ? "selected" : ""}>Done</option>
         </select>
       </td>
       <td>
-        <button onclick="updateRow(this)">Update</button>
-        <button onclick="deleteTodo('${todo.id}')">Delete</button>
+        <button onclick="updateRow(this)" class="text-xs text-white font-semibold border bg-[#3c3c3c] rounded-md py-1 px-4">Update</button>
+        <button onclick="deleteTodo('${todo.id}')" class="text-xs text-white font-semibold border bg-[#3c3c3c] rounded-md py-1 px-4">Delete</button>
       </td>`;
     document.getElementById("todoTableBody").appendChild(row);
   }

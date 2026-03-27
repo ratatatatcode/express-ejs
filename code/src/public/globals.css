@@ -7,6 +7,6 @@ body {
   background-color: #f5f6f8;
 }
 
-p, h1, h2, h3, h4, label, input {
+p, h1, h2, h3, h4, label, input, tr, th {
   color: #3c3c3c;
 }
