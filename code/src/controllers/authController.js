@@ -54,22 +54,21 @@ exports.resetPasswordForEmail = async (req, res) => {
     return res.status(200).json({ message: "Password reset email sent" });
   } catch (error) {
     if (error.message === "not-found" || error.code === "auth/user-not-found")
-      return res
-        .status(404)
-        .json({ message: "No user found with that email address" });
+      return res.status(404).json({ message: "No user found with that email address" });
 
     console.error(`Password reset error: ${e}`)
-    return res
-      .status(500)
-      .json({ message: "Failed to send password reset email" });
+    return res.status(500).json({ message: "Failed to send password reset email" });
   }
 };
 
 exports.logout = (req, res) => {
-  req.session.destroy((err) => {
-    if (err) return res.status(500).json({ message: "Logout failed" });
-
+  try {
+    req.session.destroy((err) => {
+      if (err) return res.status(500).json({ message: "Logout failed" });
+      return res.status(200).json({ message: "Logout successful" });
+    });
+  } catch (e) {
     console.error(`Logout error: ${e}`)
-    return res.status(200).json({ message: "Logout successful" });
-  });
+    return res.status(500).json({ message: "Failed to logout your account." });
+  }
 };
